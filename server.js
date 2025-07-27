@@ -10,10 +10,10 @@ const PORT = 3000;
 
 app.use(express.static("public"));
 
-// In-memory bookings array
+
 let bookings = [];
 
-// Sample venue names for more realistic data
+
 const venueNames = [
   "The Golden Spoon",
   "Bella Vista Restaurant",
@@ -32,22 +32,22 @@ const venueNames = [
   "Mountain Peak Restaurant",
 ];
 
-// Generate a mock booking every 5 seconds
+
 setInterval(() => {
   const booking = {
     venueName: venueNames[Math.floor(Math.random() * venueNames.length)],
-    partySize: Math.floor(Math.random() * 8) + 1, // 1-8 people
+    partySize: Math.floor(Math.random() * 8) + 1, 
     time: new Date().toLocaleTimeString(),
   };
 
-  bookings.unshift(booking); // add to top
+  bookings.unshift(booking); 
 
-  // Keep only last 50 bookings to prevent memory issues
+  
   if (bookings.length > 50) {
     bookings = bookings.slice(0, 50);
   }
 
-  io.emit("new-booking", booking); // send to all clients
+  io.emit("new-booking", booking); 
   console.log(
     `New booking: ${booking.venueName} - Party of ${booking.partySize} at ${booking.time}`
   );
@@ -56,7 +56,7 @@ setInterval(() => {
 io.on("connection", (socket) => {
   console.log("A user connected");
 
-  // Send existing bookings when a new client connects
+  
   socket.emit("initial-bookings", bookings);
 
   socket.on("disconnect", () => {
