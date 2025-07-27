@@ -11,7 +11,6 @@ const refreshIndicator = document.getElementById("refreshIndicator");
 let bookings = [];
 let venues = new Set();
 
-// Initial bookings
 socket.on("initial-bookings", (initialBookings) => {
   bookings = initialBookings;
   bookingsList.innerHTML = "";
@@ -20,7 +19,6 @@ socket.on("initial-bookings", (initialBookings) => {
   updateEmptyState();
 });
 
-// New bookings
 socket.on("new-booking", (booking) => {
   bookings.unshift(booking);
   addBooking(booking, true);
@@ -33,7 +31,6 @@ function addBooking(booking, isNew = false) {
   const li = document.createElement("li");
   li.className = `booking-item ${isNew ? "new-booking" : ""}`;
 
-  // Create booking content
   li.innerHTML = `
         <div class="booking-info">
             <div class="booking-venue">
@@ -59,7 +56,6 @@ function addBooking(booking, isNew = false) {
   if (isNew && bookingsList.firstChild) {
     bookingsList.insertBefore(li, bookingsList.firstChild);
 
-    // Remove new-booking class after animation
     setTimeout(() => {
       li.classList.remove("new-booking");
     }, 3000);
@@ -72,20 +68,16 @@ function addBooking(booking, isNew = false) {
 }
 
 function updateStats() {
-  // Update booking count
   bookingCount.textContent = bookings.length;
 
-  // Update last update time
   lastUpdate.textContent = new Date().toLocaleTimeString();
 
-  // Calculate total guests
   const totalGuestCount = bookings.reduce(
     (sum, booking) => sum + booking.partySize,
     0
   );
   totalGuests.textContent = totalGuestCount;
 
-  // Update active venues count
   activeVenues.textContent = venues.size;
 }
 
@@ -106,10 +98,8 @@ function showRefreshAnimation() {
   }, 1000);
 }
 
-// Initialize empty state
 updateEmptyState();
 
-// Update time every second
 setInterval(() => {
   if (bookings.length > 0) {
     lastUpdate.textContent = new Date().toLocaleTimeString();
