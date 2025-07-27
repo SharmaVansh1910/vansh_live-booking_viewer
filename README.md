@@ -70,7 +70,7 @@ Every 5 seconds, a new booking will appear at the top of the list in real-time.
 ---
 
 ## 🤝 Notes
-- No external database needed — data is stored in memory during server runtime.
+- No external database needed , data is stored in memory during server runtime.
 - For deployment, host the backend on any Node-compatible server (e.g., Vercel, Heroku, or Render).
 
 ---
