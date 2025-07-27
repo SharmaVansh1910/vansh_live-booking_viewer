@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Bookings Viewer</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="header-content">
+          <div class="header-left">
+            <i class="fas fa-calendar-check"></i>
+            <h1>Live Bookings Viewer</h1>
+          </div>
+          <div class="header-right">
+            <div class="status-indicator">
+              <span class="status-dot"></span>
+              <span class="status-text">Live</span>
+            </div>
+            <div class="booking-count">
+              <span id="bookingCount">0</span> Bookings
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <i class="fas fa-clock"></i>
+            <div class="stat-info">
+              <span class="stat-label">Last Update</span>
+              <span class="stat-value" id="lastUpdate">-</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <div class="stat-info">
+              <span class="stat-label">Total Guests</span>
+              <span class="stat-value" id="totalGuests">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-store"></i>
+            <div class="stat-info">
+              <span class="stat-label">Active Venues</span>
+              <span class="stat-value" id="activeVenues">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bookings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-list-alt"></i> Recent Bookings</h2>
+            <div class="refresh-indicator" id="refreshIndicator">
+              <i class="fas fa-sync-alt"></i>
+            </div>
+          </div>
+          <div class="bookings-container">
+            <ul id="bookingsList" class="bookings-list"></ul>
+            <div class="empty-state" id="emptyState">
+              <i class="fas fa-calendar-plus"></i>
+              <h3>No bookings yet</h3>
+              <p>New bookings will appear here automatically</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
